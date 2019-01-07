@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Projects</h1>
+
+  <%= form_tag(projects_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term]%>
+  <%= submit_tag 'Search' %>
+  <% end %>
+
+<% if (@projects.blank? == true) then  %> 
+  <b><%= "There are no such records found" %></b>
+<% else %>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%= sortable("title",params[:term]) %></th>
+        <th>Duration</th>
+        <th>Leader</th>
+        <th>Description</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.duration %></td>
+          <td><%= project.leader%></td>
+          <td><%= project.description %></td>
+          <td><%= link_to 'See', see_project_path(project) %></td>
+          <td><%= link_to 'Show', project_path(project) %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Destroy', "projects/"+project.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end -%>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
+<br>
+<%= link_to 'Make Project', make_project_path %>
+
+<h4 style="text-align: center;"> <%= will_paginate @clients %></h4>
