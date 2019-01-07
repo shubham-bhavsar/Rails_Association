@@ -1,0 +1,41 @@
+<%= form_for(channel) do |f| %>
+  <% if channel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
+
+      <ul>
+      <% channel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Category %>
+    <%= f.text_field :category %>
+  </div>
+
+  <div class="field">
+    <%= collection_check_boxes(:channel, :subscriber_ids, Subscriber.all, :id, :name) do |b|%>  
+      <%= b.check_box %>
+      <%= b.label do%>
+      <%= b.object.name %> (<%= b.object.age %> <em>years</em>)
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

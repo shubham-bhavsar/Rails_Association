@@ -1,0 +1,41 @@
+<%= form_for(seller) do |f| %>
+  <% if seller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(seller.errors.count, "error") %> prohibited this seller from being saved:</h2>
+
+      <ul>
+      <% seller.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shopName %>
+    <%= f.text_field :shopName %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ShopArea %>
+    <%= f.text_field :ShopArea %>
+  </div>
+
+  <div class="field">
+    <%= collection_check_boxes(:seller, :buyer_ids, Buyer.all, :id, :name) do |b|%>  
+      <%= b.check_box %>
+      <%= b.label do%>
+        <%= b.object.name %> (<%= b.object.adress %>)
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

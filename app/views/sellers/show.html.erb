@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Seller Details:</h2>
+<p>
+  <strong>Name:</strong>
+  <%= @seller.name %>
+</p>
+
+<p>
+  <strong>Shopname:</strong>
+  <%= @seller.shopName %>
+</p>
+
+<p>
+  <strong>Shoparea:</strong>
+  <%= @seller.ShopArea %>
+</p>
+
+<%= link_to 'Edit', edit_seller_path(@seller) %> |
+<%= link_to 'Back', sellers_path %>
+
+<% if @seller.buyers.present? %>
+	<% @seller.buyers.each do |buyer|%>
+		<h2>Buyer Details:</h2>
+		<p>
+			<strong>Name:</strong>
+			<%= buyer.name %>
+		</p>
+
+		<p>
+			<strong>Adress:</strong>
+			<%= buyer.adress %>
+		</p>
+
+		<p>
+			<strong>Email:</strong>
+			<%= buyer.email %>
+		</p>
+
+		<p>
+			<strong>Number:</strong>
+			<%= buyer.MobileNumber %>
+		</p>
+	<% end %>
+<% end %>

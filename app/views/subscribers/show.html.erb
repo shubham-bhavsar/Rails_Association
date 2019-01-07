@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Subscriber Details:</h3>
+<p>
+  <strong>Name:</strong>
+  <%= @subscriber.name %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @subscriber.country %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @subscriber.age %> years
+</p>
+
+<%= link_to 'Edit', edit_subscriber_path(@subscriber) %> |
+<%= link_to 'Back', subscribers_path %>
+
+<h2>Channels(<%= @subscriber.channels.size %>)</h2>
+<% if @subscriber.channels.present? %>
+	<% @subscriber.channels.each do |channel|%>
+		<h3>Channel Details:</h3>
+		<p>
+			<strong>Title:</strong>
+			<%= channel.title %>
+		</p>
+
+		<p>
+			<strong>Description:</strong>
+			<%= channel.description %>
+		</p>
+
+		<p>
+			<strong>Category:</strong>
+			<%= channel.category %>
+		</p>
+	<% end %>
+<% end %>
